@@ -1,3 +1,4 @@
+<!doctype html5>
 <html>
   <head>
     <title>The Game of Pong</title>
@@ -10,7 +11,7 @@
       var CANVAS_HEIGHT = 300;
 
       // Radius of the ball
-      var BALL_RADIUS = 10;
+      var BALL_RADIUS = 15;
 
       // Color of the ball
       var BALL_COLOR = "#ff00ff";
@@ -22,34 +23,6 @@
       // The current speed of the ball
       var dx = 2;
       var dy = 5;
-
-      var paddle_Width = 10;
-      var paddle_Height = 50; 
-      var leftPaddle_y = CANVAS_HEIGHT /2 - paddle_Height /2; 
-      var rightPaddle_y = leftPaddle_y; 
-      var leftPaddle_x = 5;
-      var rightPaddle_x = CANVAS_WIDTH - paddle_Width - leftPaddle_x;
-
-      function handleKeyDown(event)
-      {
-        switch(event.which)
-        {
-          case 38:
-            rightPaddle_y -= 2;
-            if(rightPaddle_y <= 0)
-            {
-              rightPaddle_y = 0;
-            } 
-            break;
-          case 40:
-            rightPaddle_y += 2;
-            if(rightPaddle_y >= CANVAS_HEIGHT - paddle_Height)
-            {
-              rightPaddle_y = CANVAS_HEIGHT - paddle_Height;
-            } 
-            break;
-        }
-      }
 
       /**
        * This function takes a 2d canvas context and draws a ball on it at ballX and ballY
@@ -78,20 +51,6 @@
         context.fill();
       }
 
-      function drawPaddles(context)
-      {
-        context.beginPath();
-        context.rect(leftPaddle_x,leftPaddle_y,paddle_Width,paddle_Height);
-        context.fillStyle = "black";
-        
-        context.fill();
-
-        context.beginPath();
-        context.rect(rightPaddle_x,rightPaddle_y,paddle_Width,paddle_Height);
-        context.fillStyle = "black";
-        
-        context.fill();
-      }
       /**
        * This function is meant to be the refreshing drawing function. It gets the
        * appropriate 2d canvas context, clears it, and delegates to the various
@@ -99,8 +58,7 @@
        */
       function draw() {
         var context = pongCanvas.getContext('2d');
-        context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);        
-        drawPaddles(context);
+        context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         drawBall(context);
       }
 
@@ -124,7 +82,7 @@
       };
     </style>
   </head>
-  <body onkeydown="handleKeyDown(event)">
+  <body>
     <canvas id="pongCanvas" width="500" height="300"></canvas>
   </body>
 </html>
